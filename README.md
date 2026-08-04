@@ -66,13 +66,15 @@ and locate the output used to drive the IR LED. If you cannot read the chip numb
 ### 2. Capturing the Signal
 
 Connect the logic analyzer to the remote and capture each button
-press. Public information for these remotes reveals they send their IR signals at 38kHz. This is importants because you need to reliables read that signal so you set your logic analyzer to match the frequency of the remote. If you are reading at too high a frequency you are going to get duplicate data, but to low and you risk missing information. 
+press. Public information for these remotes reveals they send their IR signals at 38kHz. This is importants because you need to reliables read that signal so you set your logic analyzer to match the frequency of the remote. I chose to sample the keypresses at 100kHz to guarantee I got the whole signal. Each datafile is one keypress. because the scale is so small, it is easiest to program a script to parse an array of files than one big file determining when one ends and another begins. This is why we stick to one keypress one datafile. 
 
-- exported binary captures
-- one capture file per command
+// all this means is when it pulses HIGH LOW HIGH LOW, my output might be HIGH HIGH HIGH LOW LOW HIGH HIGH. This guarentees we got the whole signal and didn't miss anything. The good part about this too is that we can calculate about how many extra signals are read to translate our 100kHz into the actual remote sequence with ~99% accuracy. This is because we know the frequency it is sending at 38kHz and we are reading at 100kHz so we divide what we are reading by what we are sending to find for every one tick the remote sends we read 2.6 ticks. This is why we have 1 or 2 extra reads. I ised this to reason that after the hello sequence when the remote sends high and low signals, not extended bursts, I need a way to tear back all those extra values. 
+
 
 ### 3. Parsing the Captures
 The first task of the Program was to get parse out just the signal from when it starts to when it ends. 
+When the base signal has been extracted. 
+
 Describe the C program that:
 
 - reads the binary files
