@@ -69,10 +69,6 @@ Now that May’s script was automated and the circuit worked from the coach what
 
 Later I changed this to have a 4x4 button matrix. The purpose is because I wanted to decrease the number of wires the buttons took up. With adding buttons for macros and the ability to change the macros required as of right now 16 buttons. This is far too many inputs when I need to include an output wire for the IR LED as well as the LCD. By adding a button matrix I cut the number of inputs required in half to 8 inputs.
 
-## Step 6
-
-I ended up switching the board I used from an Arduino Uno to a ESP32-S2 for its WiFi capabilities. The reason is because I did some research and found Roku has an API that I can connect to and query information about icons/apps. This can also be used to create and send the macros but I want to stick with using the signals I generated using the logic analyzer. The point of connected through the API would be to dynamically change the macros if an app were to move. 
-
 ## Conclusion
 
 With all this in mind I was able to create macros that communicate with my tv.
