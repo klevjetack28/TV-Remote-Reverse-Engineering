@@ -72,7 +72,7 @@ press. Public information for these remotes reveals they send their IR signals a
 - one capture file per command
 
 ### 3. Parsing the Captures
-The first task of the Program was to get parse out just the signal from when it starts to when it ends.
+The first task of the Program was to get parse out just the signal from when it starts to when it ends. 
 Describe the C program that:
 
 - reads the binary files
