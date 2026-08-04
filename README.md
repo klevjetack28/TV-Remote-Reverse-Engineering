@@ -8,18 +8,17 @@ with an Arduino.
 
 ## Overview
 
-A concise explanation of:
-
-### The repetitive TV sequence you wanted to automate
+### The repetitive TV sequence I wanted to automate
 When my wife and I need some background noise, we play the show Modern Family on Hulu. I figured I could get an Arduino to reproduce those same actions as a remote and the project was born.
 
-### Why you chose to reverse engineer the physical remote
+### Why I chose to reverse engineer the physical remote
 I knew it was possible, so I wanted to figure out how it was possible.
 
 ### How the logic analyzer became the central tool
 The Logic Analyzer is one way to solve the project. It just happened to be the first tool that popped into my head at he time. Another way might be firing the remote at your own reciever and copying the input. The easiest and friendliest way to reproduce this is with the Roku API.
 
 ### What the completed system can do
+The completed system is able to imitate each button on the remote and pair key presses with defined delays to creat a chain of keypresses. This automates repetitive sequences such as volume up 10.
 
 ## Project Goals
 
@@ -62,7 +61,7 @@ Television
 ### 1. Inspecting the Remote
 
 Open the remote, identify the microcontroller, find its datasheet,
-and locate the output used to drive the IR LED.
+and locate the output used to drive the IR LED. If you cannot read the chip number you can trace the IR LED leads back to the chip to find the lead. 
 
 ### 2. Capturing the Signal
 
@@ -77,7 +76,7 @@ Explain:
 - one capture file per command
 
 ### 3. Parsing the Captures
-
+The first task of the Program was to get parse out just the signal from when it starts to when it ends.
 Describe the C program that:
 
 - reads the binary files
