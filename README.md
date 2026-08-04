@@ -66,12 +66,8 @@ and locate the output used to drive the IR LED. If you cannot read the chip numb
 ### 2. Capturing the Signal
 
 Connect the logic analyzer to the remote and capture each button
-press at an appropriate sample rate.
+press. Public information for these remotes reveals they send their IR signals at 38kHz. This is importants because you need to reliables read that signal so you set your logic analyzer to match the frequency of the remote. If you are reading at too high a frequency you are going to get duplicate data, but to low and you risk missing information. 
 
-Explain:
-
-- the 38 kHz carrier
-- sample rate
 - exported binary captures
 - one capture file per command
 
