@@ -73,7 +73,7 @@ press. Public information for these remotes reveals they send their IR signals a
 
 ### 3. Parsing the Captures
 The first task of the Program was to get parse out just the signal from when it starts to when it ends. 
-When the base signal has been extracted. 
+The base signal is extracted by forming a string of 1's and 0's for my recipe function to cook. The recipe uses dhe data about the different frequencies to compact the signal from 100kHz back to 38kHz. It is prechecking the values of next two pulses determining if they should stay or be removed. 
 
 Describe the C program that:
 
