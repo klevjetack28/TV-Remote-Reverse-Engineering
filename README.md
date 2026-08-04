@@ -73,7 +73,7 @@ press. Public information for these remotes reveals they send their IR signals a
 
 ### 3. Parsing the Captures
 The first task of the Program was to get parse out just the signal from when it starts to when it ends. 
-The base signal is extracted by forming a string of 1's and 0's for my recipe function to cook. The recipe uses dhe data about the different frequencies to compact the signal from 100kHz back to 38kHz. It is prechecking the values of next two pulses determining if they should stay or be removed. 
+The base signal is extracted by forming a string of 1's and 0's for my recipe function to cook. The recipe function is what is responsible for identifying the marks and spaces of the signal, and converting them back into their original 38kHz frequencies. Marks and spaces are terms used to sefine when the signal and high and when it is low. Each remote has a header to the keypress protocol. This headder is commonly a long mark followed by a medium space and alternates for a good chunk before sending the selected sequence. 
 
 Describe the C program that:
 
