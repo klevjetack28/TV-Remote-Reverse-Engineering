@@ -73,23 +73,12 @@ press. Public information for these remotes reveals they send their IR signals a
 
 ### 3. Parsing the Captures
 The first task of the Program was to get parse out just the signal from when it starts to when it ends. 
-The base signal is extracted by forming a string of 1's and 0's for my recipe function to cook. The recipe function is what is responsible for identifying the marks and spaces of the signal, and converting them back into their original 38kHz frequencies. Marks and spaces are terms used to sefine when the signal and high and when it is low. Each remote has a header to the keypress protocol. This headder is commonly a long mark followed by a medium space and alternates for a good chunk before sending the selected sequence. My scripts counts each tick that the signal was high and adds it to an array before switching into the oposite reading mode. It goes through the whole signal and stores each mark and soace into a single array. The odd indexes are marks and even indexes are spaces. This one array stores the signal array as the number of ticks each mark or space in sequence lasts. This it because we can calculate the length in time a single tick is, calculate the total time because we have number of ticks and how much each tick is worth, and turn our signal that was retrieved at 100kHz into a signal that mimics the IR remote because we know how long each instance lasts. 
-
-Describe the C program that:
-
-- reads the binary files
-- counts consecutive high and low samples
-- converts sample counts into microseconds
-- identifies marks and spaces
-- handles timing variability
-- outputs Arduino-compatible arrays
-
-Include a small before-and-after example.
+The base signal is extracted by forming a string of 1's and 0's for my recipe function to cook. The recipe function is what is responsible for identifying the marks and spaces of the signal, and converting them back into their original 38kHz frequencies. Marks and spaces are terms used to define when the signal is pulsing and when it is hanging. A signal is primarily held high. This is why when marks are pulses; Sections of the signal alternating between high and low. Spaces are hanging; a continuous high. Each remote has a header to the keypress protocol. This header is commonly a long mark followed by a medium space and alternates for a good chunk before sending the selected sequence. My scripts counts each tick that the signal was high and adds it to an array before switching into the oposite reading mode. It goes through the whole signal and stores each mark and soace into a single array. The odd indexes are marks and even indexes are spaces. This one array stores the signal array as the number of ticks each mark or space in sequence lasts. This it because we can calculate the length in time a single tick is, calculate the total time because we have number of ticks and how much each tick is worth, and turn our signal that was retrieved at 100kHz into a signal that mimics the IR remote because we know how long each mark/space lasts. The final part of the script was packaging it all to copy into the Arduino program. The C script was responsible for outputting an arduino compatible array into it's own file. I used a shell script to finish the transaction by copying and concating them to the clipboard for me to seamlessly copy and paste into the Arduino program.
 
 ### 4. Reproducing the Signal
+The remote it selft sends the signal in pulses. What this means is that during a make the remote is pulsing HIGH LOW HIGH LOW for the entire clip. Spaces would be pulsing LOWs providing the signal HIGH HIGH HIGH HIGH. This is important becuase I need a way to reproduce this pulse on the Arduino. The standard way is to turn on a pin and turn it back off but these function calls require too much time to execute at microsecond precision. Arduino has a defined registers for this exact purpose that we can manipulate. The way I solved this problem was using the registers to set the PWM of the pin at 38kHz and modulated the index so odd indexes it pulses and even indexes it hangs high.
 
-Explain how the Arduino uses hardware timers to generate the
-38 kHz carrier and turns it on during marks and off during spaces.
+The other difficult part of using the Arduino to reproduce the signal was the rating of the IR LED were not supported with a standard Arduino. 
 
 ### 5. Building the IR Driver Circuit
 
